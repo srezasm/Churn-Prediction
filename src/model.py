@@ -1,7 +1,9 @@
 from keras.models import Sequential
 from keras.layers import Dense, LSTM, Input, Dropout, Reshape
 from keras import optimizers
+from config import Config
 
+config = Config()
 
 def load_model(features_dim):
     model = Sequential()
@@ -19,6 +21,6 @@ def load_model(features_dim):
 
     # Compile the model
     model.compile(loss='binary_crossentropy',
-                    optimizer=optimizers.Adam(learning_rate=10e-4), metrics=['accuracy'])
+                    optimizer=optimizers.Adam(learning_rate=config.LEARNING_RATE), metrics=['accuracy'])
 
     return model

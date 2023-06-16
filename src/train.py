@@ -7,8 +7,6 @@ from plot import plot_history
 from sklearn.utils.class_weight import compute_class_weight
 
 config = Config()
-BATCH_SIZE = 64
-EPOCHS = 25
 
 
 def train(model, X_train, X_test, y_train, y_test):
@@ -18,8 +16,8 @@ def train(model, X_train, X_test, y_train, y_test):
 
     # Train the model
     X_train = np.expand_dims(X_train, axis=2)
-    history = model.fit(X_train, y_train, batch_size=BATCH_SIZE,
-                        epochs=EPOCHS, validation_data=(X_test, y_test), class_weight=class_weight_dict)
+    history = model.fit(X_train, y_train, batch_size=config.BATCH_SIZE,
+                        epochs=config.EPOCHS, validation_data=(X_test, y_test), class_weight=class_weight_dict)
 
     y_pred = model.predict(X_test)
     y_pred = np.argmax(y_pred, axis=1)
@@ -47,15 +45,15 @@ def train(model, X_train, X_test, y_train, y_test):
     print(f'Recall:         {recall:.3f}')
 
     # Save the model in HD
-    model.save(config.model_path)
-    print(f"Successfully saved the model at {config.model_path}")
+    model.save(config.MODEL_PATH)
+    print(f"Successfully saved the model at {config.MODEL_PATH}")
 
     return history
 
 
 if __name__ == "__main__":
     # Load the features from HD
-    features = joblib.load(config.features_path)
+    features = joblib.load(config.FEATURES_PATH)
 
     # Load the model
     model = load_model(features[0].shape[1])

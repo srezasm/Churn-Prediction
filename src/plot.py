@@ -24,5 +24,5 @@ def plot_history(history):
     ax2.legend(['Train', 'Test'], loc='upper left')
 
     # Save the figure with both subplots
-    fig.savefig(config.plot_path)
-    print(f"saved history plot at: {config.plot_path}")
+    fig.savefig(config.PLOT_PATH)
+    print(f"saved history plot at: {config.PLOT_PATH}")
